@@ -5,13 +5,18 @@ type Query {
   reviewsForRecipe(recipeId: ID!): [RecipeReview!]!
 }
 
-type Recipe @key(fields: "id", resolvable: false) {
+type Recipe @key(fields: "id") {
   id: ID!
+  "The reviews for this recipe"
+  reviews: [RecipeReview!]!
+  "The average rating for this recipe"
+  overallRating: Float
 }
 
 type RecipeReview {
   id: ID!
   recipeId: ID!
   content: String!
+  rating: Float
   recipe: Recipe
 }
