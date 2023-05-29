@@ -23,10 +23,24 @@ class RecipeReviewsAPI {
         id: id.toString(36).substr(2, 9),
         recipeId,
         content: content,
+        rating: (Math.random() * 10).toFixed(1),
       });
     }
 
     return reviews;
+  }
+
+  getOverallRatingForRecipe(recipeId) {
+    // Using a DataLoader would definitely be recommended here to avoid duplicate calls...
+    var reviews = this.getReviewsForRecipe(recipeId);
+
+    var sum = 0;
+
+    for (var i = 0; i < reviews.length; i++) {
+      sum += parseFloat(reviews[i].rating);
+    }
+
+    return (sum / reviews.length).toFixed(1);
   }
 }
 
