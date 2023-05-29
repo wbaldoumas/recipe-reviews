@@ -5,6 +5,10 @@ type Query {
   reviewsForRecipe(recipeId: ID!): [RecipeReview!]!
 }
 
+type Recipe @key(fields: "id", resolvable: false) {
+  id: ID!
+}
+
 type RecipeReview {
   id: ID!
   recipeId: ID!
